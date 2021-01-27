@@ -25,7 +25,8 @@ function startwatch() {
 }
 
 function styles() {
-    return src('./src/sass/**/*.sass')
+    return src('./src/sass/app.min.sass')
+    // .pipe(concat('style.css'))
     .pipe(sass({
         outputStyle: "expanded"
     }))

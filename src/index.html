@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do</title>
-    <link rel="stylesheet" href="../app/style.css">
+    <link rel="stylesheet" href="../app/app.min.css">
 </head>
 <body>
     <header class="header">
@@ -15,7 +15,7 @@
                 </div>
 
                 <nav class="nav">
-                    <a class="nav__link" href="#">Home</a>
+                    <a class="nav__link" href="index.html">Home</a>
                     <a class="nav__link" href="#">Login</a>
                     <a class="nav__link" href="#">Registration</a>
                 </nav>
@@ -24,28 +24,41 @@
     </header>
 
     <div class="to__do">
-        
-    </div>
+        <div class="container">
+            <div class="form-registration" style="display: block">
+                <form class="transparent">
+                    <div class="form-inner">
+                        <h3>LOGIN</h3>
+                            <label for="username">Email*:</label>
+                            <input type="text" id="username">
+                            <label for="password">Password*:</label>
+                            <input id="password" type="password">
+                            <!-- <input type="checkbox" id="custom-checkbox">
+                            <label for="custom-checkbox">Fill me up</label> -->
+                            <input type="submit" value="LOGIN">
+                        </div>
+                    </form>
 
-    <div id="container-registration" class="container">
-
-        <form id="myForm" class="box" name="person">
-            <h1>Login</h1>
-            <input type="text" class="formInput _req _email" placeholder="Email:" id="login-name" name="name" >
-            <input type="password" class="formInput _req" placeholder="Password:" id="login-pass" name="password">
-            <input type="submit" id="formsub" value="Continue">
-        </form>
-        <div id="content-switch">
-            <div class="content-switch-explaination">
-                Dont havean account
+                </div>
+<!-- 
+                <form id="myForm" class="box" name="person">
+                    <input type="text" class="formInput _req _email" placeholder="Email:" id="login-name" name="name" >
+                    <input type="password" class="formInput _req" placeholder="Password:" id="login-pass" name="password">
+                    <input type="submit" id="formsub" value="Continue">
+                </form>
+                <div id="content-switch">
+                    <div class="content-switch-explaination">
+                        Dont havean account
+                    </div>
+                </div>
+                <div class="switch">
+                    <form id="swith-form"></form>
+                    <button class=btn-reg>Creat account</button>
+                </div> -->
             </div>
         </div>
-        <div class="switch">
-            <form id="swith-form"></form>
-            <button class=btn-reg>Creat account</button>
-        </div>
     </div>
-   
+        
     <script src="../app/app.min.js"></script>
 </body>
 </html>
