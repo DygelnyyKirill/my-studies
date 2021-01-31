@@ -16,8 +16,8 @@
 
                 <nav class="nav">
                     <a class="nav__link" href="index.html">Home</a>
-                    <a class="nav__link" href="#">Login</a>
-                    <a class="nav__link" href="#">Registration</a>
+                    <a class="nav__link" id="auth__login" href="#">Login</a>
+                    <a class="nav__link" id="regist" href="#">Registration</a>
                 </nav>
             </div>
         </div>
@@ -25,36 +25,29 @@
 
     <div class="to__do">
         <div class="container">
-            <div class="form-registration" style="display: block">
-                <form class="transparent">
-                    <div class="form-inner">
-                        <h3>LOGIN</h3>
-                            <label for="username">Email*:</label>
-                            <input type="text" id="username">
-                            <label for="password">Password*:</label>
-                            <input id="password" type="password">
-                            <!-- <input type="checkbox" id="custom-checkbox">
-                            <label for="custom-checkbox">Fill me up</label> -->
-                            <input type="submit" value="LOGIN">
-                        </div>
-                    </form>
-
-                </div>
-<!-- 
-                <form id="myForm" class="box" name="person">
-                    <input type="text" class="formInput _req _email" placeholder="Email:" id="login-name" name="name" >
-                    <input type="password" class="formInput _req" placeholder="Password:" id="login-pass" name="password">
-                    <input type="submit" id="formsub" value="Continue">
-                </form>
-                <div id="content-switch">
-                    <div class="content-switch-explaination">
-                        Dont havean account
+            <div class="form_registration" style="display: block">
+                <form action="#" id="myForm" class="form_body" name="person">
+                    <h1 class="form_title">Registration</h1>
+                    <div class="form_item">
+                        <label for="formName" class="form_label">UserName*:</label>
+                        <input id="formName" type="text" class="form_input">
                     </div>
-                </div>
-                <div class="switch">
-                    <form id="swith-form"></form>
-                    <button class=btn-reg>Creat account</button>
-                </div> -->
+                    <div class="form_item">
+                        <label for="formEmail" class="form_label">E-mail*:</label>
+                        <input id="formEmail" type="text" class="form_input">
+                    </div>
+                    <div class="form_item">
+                        <label for="formPass" class="form_label">Password*:</label>
+                        <input id="formPass" type="text" class="form_input">
+                    </div>
+                    <div class="form_item">
+                        <div class="checkbox">
+                            <input id="formAgreement" checked type="checkbox" name="agreement" class="checkbox_input">
+                            <label for="formAgreement" class="checkbox_label"><span>I agree with the conditions</span></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="form_button">Registration</button>
+                </form>
             </div>
         </div>
     </div>

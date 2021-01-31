@@ -1,3 +1,6 @@
+* 
+   box-sizing: border-box
+
 .to__do 
     display: flex
     flex-direction: column
@@ -8,104 +11,96 @@
     -wedkit-background-size: cover
     background-size: cover
 
-.form-registration
+.form_registration
     width: 100%
     max-width: 400px
     margin: 0 auto
+    padding: 30px 0 
 
-* 
-   box-sizing: border-box
-
-.transparent 
+.form_body
    position: relative
    max-width: 400px
    padding: 60px 50px
    margin: 50px auto 0
-   background-color: #111111
+   background-color: #a0a0a0
    background-size: cover
    border-radius: 10px
 
-.transparent:before 
-   content: ""
-   position: absolute
-   top: 0
-   left: 0
-   right: 0
-   bottom: 0
-   background: linear-gradient(to right bottom, rgba(43, 44, 78, .5), rgba(104, 22, 96, .5))
+.form_title
+   font-size: 40px
+   font-weight: 700
+   margin: 0px 0px 30px 0px
 
-.form-inner 
-   position: relative
+.form_item 
+   margin: 0px 0px 20px 0px
 
-.form-inner h3 
-   position: relative
-   margin-top: 0
-   color: white
-   font-family: 'Roboto', sans-serif
-   font-weight: 300
-   font-size: 26px
-   text-transform: uppercase
-
-.form-inner h3:after 
-   content: ""
-   position: absolute
-   left: 0
-   bottom: -6px
-   height: 2px
-   width: 60px
-
-.form-inner label 
+.form_label 
+   font-size: 18px
    display: block
-   padding-left: 15px
-   font-family: 'Roboto', sans-serif
-   color: rgba(255, 255, 255, .6)
-   text-transform: uppercase
-   font-size: 14px
+   margin: 0px 0px 10px 0px 
 
-.form-inner input 
-   display: block
+.form_input 
+   height: 50px
+   padding: 0px 20px
+   border-radius: 5px
    width: 100%
-   padding: 0 15px
-   margin: 10px 0 15px
-   border-width: 0
-   line-height: 40px
-   border-radius: 20px
-   color: white
-   background: rgba(255, 255, 255, .2)
-   font-family: 'Roboto', sans-serif
+   font-size: 18px
 
-.form-inner input[type="checkbox"] 
-   position: absolute
-   opacity: 0
+.checkbox_input
+   display: none
 
-#custom-checkbox+label 
+.checkbox_input:checked + .checkbox_label::after
+   transform: scale(1)
+
+.checkbox_label 
+   font-size: 16px
+   width: 100% 
+   line-height: 140%
+   display: inline-flex
+   align-items: center
    position: relative
-   margin: 20px 0
-   text-transform: none
    cursor: pointer
 
-#custom-checkbox+label:before 
-   content: ""
-   display: inline-block
-   width: 20px
-   height: 20px
-   margin-right: 10px
-   vertical-align: text-top
-   background: white
+.checkbox_label::before 
+   content: "" 
+   align-self: flex-start
+   flex: 0 0 24px
+   height: 24px
+   background-color: #ffffff
+   border-radius: 4px
+   margin: 0px 10px 0px 0px
 
-#custom-checkbox:checked+label:before 
-   background: #1762EE
-
-#custom-checkbox:checked+label:after 
+.checkbox_label::after 
+   transition: transform 0.5s ease 0se
    content: ""
+   width: 16px
+   height: 16px
    position: absolute
-   width: 2px
-   height: 2px
-   left: 20px
-   top: 9px
-   background: white
-   box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white
-   transform: rotate(45deg)
+   top: 4px
+   left: 4px
+   background-color: #4353
+   border-radius: 4px
+   transform: scale(0)
 
-.form-inner input[type="submit"] 
-   background: #1762EE
+.checkbox_label a
+   color: #435346
+
+.form_button
+   width: 100%
+   display: flex
+   justify-content: center
+   align-items: center
+   min-height: 60px
+   background-color: #4353
+   color: #ffffff
+   font-size: 18px
+   text-transform: uppercase
+   letter-spacing: 2px
+   font-weight: 700
+   cursor: pointer
+
+.form_button:hover 
+   background-color: #4355
+
+.form_input._error 
+   box-shadow: 0 0 15px red
