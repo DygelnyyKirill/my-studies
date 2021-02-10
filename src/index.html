@@ -13,7 +13,6 @@
                 <div class="header__logo">
                     <H1>TO-DO</H1>
                 </div>
-
                 <nav class="nav">
                     <a class="nav__link" href="index.html">Home</a>
                     <a class="nav__link" id="auth__login" href="#">Login</a>
@@ -26,23 +25,23 @@
     <div class="to__do">
         <div class="container">
             <div class="form_registration" style="display: block">
-                <form action="#" id="myForm" class="form_body" name="person">
+                <form action="#" id="myForm" class="form_body" name="users">
                     <h1 class="form_title">Registration</h1>
-                    <div class="form_item">
+                    <!-- <div class="form_item">
                         <label for="formName" class="form_label">UserName*:</label>
-                        <input id="formName" type="text" class="form_input">
-                    </div>
+                        <input id="formName" type="text" class="form_input _req">
+                    </div> -->
                     <div class="form_item">
                         <label for="formEmail" class="form_label">E-mail*:</label>
-                        <input id="formEmail" type="text" class="form_input">
+                        <input id="formEmail" type="text" class="form_input _req _email" name="email">
                     </div>
                     <div class="form_item">
                         <label for="formPass" class="form_label">Password*:</label>
-                        <input id="formPass" type="text" class="form_input">
+                        <input id="formPass" type="password" class="form_input _req" name="password">
                     </div>
                     <div class="form_item">
                         <div class="checkbox">
-                            <input id="formAgreement" checked type="checkbox" name="agreement" class="checkbox_input">
+                            <input id="formAgreement" checked type="checkbox" name="agreement" class="checkbox_input _req">
                             <label for="formAgreement" class="checkbox_label"><span>I agree with the conditions</span></label>
                         </div>
                     </div>

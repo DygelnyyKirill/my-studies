@@ -125,6 +125,10 @@ h1 {
   font-size: 18px;
 }
 
+.checkbox._error .checkbox_label::before {
+  box-shadow: 0 0 15px red;
+}
+
 .checkbox_input {
   display: none;
 }

@@ -2,12 +2,30 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('myForm');
+    const email = document.getElementById('formEmail');
+    const pass = document.getElementById('formPass');
+  
     form.addEventListener('submit', formSend);
-
+   
     async function formSend(e) {
         e.preventDefault();
-
+       
         let error = formValidate(form);
+       
+        if (error === 0) {
+            let xhr = new XMLHttpRequest(); 
+            let url = "http://localhost:3000/auth/login"; 
+            xhr.open("POST", url); 
+            xhr.setRequestHeader("Content-Type", "application/json"); 
+                if (xhr > 400) {
+                    alert('error')
+                };
+            let data = JSON.stringify({ "email": email.value, "password": pass.value }); 
+            xhr.send(data);
+                
+        } else {
+            alert('This is a required field.');
+        }
     }
 
     function formValidate(form) {
@@ -23,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                    formAddError(input);
                    error++;
                }
-            } else if (input.getAttribute("type") === "checkbox" && input.checkbox === false) {
+            } else if (input.getAttribute("type") === "checkbox" && input.checked === false) {
                 formAddError(input);
                 error++;
             } else {
@@ -32,9 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     error++;
                 }
             }
-
         }
+        return error;
     }
+
     function formAddError(input) {
         input.parentElement.classList.add('_error');
         input.classList.add('_error');
