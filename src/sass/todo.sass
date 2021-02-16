@@ -1,110 +1,211 @@
-* 
-   box-sizing: border-box
-
-.to__do 
+.hero 
     display: flex
     flex-direction: column
-    justify-content: center 
-    width: 100%
-    height: 100vh
+    justify-content: center
     background: url("../src/img/todo.jpg") center no-repeat
-    -wedkit-background-size: cover
-    background-size: cover
-
-.form_registration
+    height: 100%
     width: 100%
-    max-width: 400px
-    margin: 0 auto
-    padding: 30px 0 
+    background-position: center
+    background-size: cover
+    position: absolute
 
-.form_body
-   position: relative
-   max-width: 400px
-   padding: 60px 50px
-   margin: 50px auto 0
-   background-color: #a0a0a0
-   background-size: cover
-   border-radius: 10px
+.status 
+    font-size: 15px
+    text-align: center
+    padding-top: 10px
 
-.form_title
-   font-size: 40px
-   font-weight: 700
-   margin: 0px 0px 30px 0px
+.form-box 
+    width: 380px
+    height: 480px
+    position: relative
+    margin: 6% auto
+    background: #ffffff
+    padding: 5px
+    overflow: hidden   
 
-.form_item 
-   margin: 0px 0px 20px 0px
+.button-box 
+    width: 220px
+    margin: 35px auto
+    position: relative
+    box-shadow: 0 0 20px 9px #ff61241f
+    border-radius: 30px
 
-.form_label 
-   font-size: 18px
-   display: block
-   margin: 0px 0px 10px 0px 
+.toggle-btn 
+    padding: 10px 30px
+    cursor: pointer
+    background: transparent
+    border: none
+    outline: none
+    position: relative 
 
-.form_input 
-   height: 50px
-   padding: 0px 20px
-   border-radius: 5px
-   width: 100%
-   font-size: 18px
+#btn 
+    top: 0
+    left: 0
+    position: absolute
+    width: 110px
+    height: 100%
+    background: linear-gradient(to right, #7b7580, #dbcca9)
+    border-radius: 30px
+    transition: .5s
 
-.checkbox._error .checkbox_label::before 
-   box-shadow: 0 0 15px red
+.input-group 
+    top: 180px
+    position: absolute
+    width: 280px
+    transition: .5s
+
+.input-field 
+    width: 100%
+    padding: 10px 0
+    margin: 5px 0
+    border-top: 0
+    border-left: 0
+    border-right: 0
+    border-bottom: 1px solid #999
+    outline: none
+    background: transparent
+
+.submit-btn 
+    width: 85%
+    padding: 10px 30px
+    cursor: pointer
+    display: block
+    margin: auto
+    background: linear-gradient(to right, #7b7580, #dbcca9)
+    border: 0
+    outline: none
+    border-radius: 30px
+
+.chech-box 
+    margin: 20px 10px 30px 0
+
+span 
+    color: #777
+    font-size: 12px
+    margin-top: 18px
+    position: absolute
+
+#login
+    left: 50px
+
+#register 
+    left: 450px
+    
+.input-field._error 
+    box-shadow: 0 0 15px red
+
+.form-item.success input 
+    border-color: #cbf8cf
+
+.form-item.error input 
+    border-color: red
 
 
-.checkbox_input
-   display: none
+// * 
+//    box-sizing: border-box
 
-.checkbox_input:checked + .checkbox_label::after
-   transform: scale(1)
+// .to__do 
+//     display: flex
+//     flex-direction: column
+//     justify-content: center 
+//     width: 100%
+//     height: 100vh
+//     background: url("../src/img/todo.jpg") center no-repeat
+//     -wedkit-background-size: cover
+//     background-size: cover
 
-.checkbox_label 
-   font-size: 16px
-   width: 100% 
-   line-height: 140%
-   display: inline-flex
-   align-items: center
-   position: relative
-   cursor: pointer
+// .form_registration
+//     width: 100%
+//     max-width: 400px
+//     margin: 0 auto
+//     padding: 30px 0 
 
-.checkbox_label::before 
-   content: "" 
-   align-self: flex-start
-   flex: 0 0 24px
-   height: 24px
-   background-color: #ffffff
-   border-radius: 4px
-   margin: 0px 10px 0px 0px
+// .form_body
+//    position: relative
+//    max-width: 400px
+//    padding: 60px 50px
+//    margin: 50px auto 0
+//    background-color: #a0a0a0
+//    background-size: cover
+//    border-radius: 10px
 
-.checkbox_label::after 
-   transition: transform 0.5s ease 0se
-   content: ""
-   width: 16px
-   height: 16px
-   position: absolute
-   top: 4px
-   left: 4px
-   background-color: #4353
-   border-radius: 4px
-   transform: scale(0)
+// .form_title
+//    font-size: 40px
+//    font-weight: 700
+//    margin: 0px 0px 30px 0px
 
-.checkbox_label a
-   color: #435346
+// .form_item 
+//    margin: 0px 0px 20px 0px
 
-.form_button
-   width: 100%
-   display: flex
-   justify-content: center
-   align-items: center
-   min-height: 60px
-   background-color: #4353
-   color: #ffffff
-   font-size: 18px
-   text-transform: uppercase
-   letter-spacing: 2px
-   font-weight: 700
-   cursor: pointer
+// .form_label 
+//    font-size: 18px
+//    display: block
+//    margin: 0px 0px 10px 0px 
 
-.form_button:hover 
-   background-color: #4355
+// .form_input 
+//    height: 50px
+//    padding: 0px 20px
+//    border-radius: 5px
+//    width: 100%
+//    font-size: 18px
 
-.form_input._error 
-   box-shadow: 0 0 15px red
+// .checkbox._error .checkbox_label::before 
+//    box-shadow: 0 0 15px red
+
+
+// .checkbox_input
+//    display: none
+
+// .checkbox_input:checked + .checkbox_label::after
+//    transform: scale(1)
+
+// .checkbox_label 
+//    font-size: 16px
+//    width: 100% 
+//    line-height: 140%
+//    display: inline-flex
+//    align-items: center
+//    position: relative
+//    cursor: pointer
+
+// .checkbox_label::before 
+//    content: "" 
+//    align-self: flex-start
+//    flex: 0 0 24px
+//    height: 24px
+//    background-color: #ffffff
+//    border-radius: 4px
+//    margin: 0px 10px 0px 0px
+
+// .checkbox_label::after 
+//    transition: transform 0.5s ease 0se
+//    content: ""
+//    width: 16px
+//    height: 16px
+//    position: absolute
+//    top: 4px
+//    left: 4px
+//    background-color: #4353
+//    border-radius: 4px
+//    transform: scale(0)
+
+// .checkbox_label a
+//    color: #435346
+
+// .form_button
+//    width: 100%
+//    display: flex
+//    justify-content: center
+//    align-items: center
+//    min-height: 60px
+//    background-color: #4353
+//    color: #ffffff
+//    font-size: 18px
+//    text-transform: uppercase
+//    letter-spacing: 2px
+//    font-weight: 700
+//    cursor: pointer
+
+// .form_button:hover 
+//    background-color: #4355
+
