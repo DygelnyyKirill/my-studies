@@ -1,24 +1,23 @@
 "use strict"
-document.addEventListener('DOMContentLoaded', function() {
     const formLogin = document.getElementById('login');
     const formRegist = document.getElementById('register');
-    const user = document.getElementById('user');
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
+    // const password = document.getElementById('password');
     
-    formLogin.addEventListener('submit', formSend);
-    formRegist.addEventListener('submit', formReg);
+    
 
     const message = {
         loading: 'Load...',
         success: 'Your data has been sent',
         failure: 'User is not found'
     }
-
-    function formSend(e) {
+    
+    const formSend = (form, path) => (e) => {
         e.preventDefault();
-        let error = formValidate(formLogin);
-       
+        const error = formValidate(form);
+        let emailInput = form.querySelector('._email');
+        let passwordInput = form.querySelector('._password');
+        let userInput = form.querySelector('._user');
+
         if (error === 0) {
             const statusMessage = document.createElement('div');
             statusMessage.classList.add('status');
@@ -26,12 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
             formLogin.append(statusMessage);
             
             const body = {
-                email: email.value,
-                password: password.value
+                // user: userInput.value,
+                email: emailInput.value,
+                password: passwordInput.value
             };
 
             const xhr = new XMLHttpRequest(); 
-            const url = "http://localhost:3000/auth/login"; 
+            const url = `http://localhost:3000/auth/${path}`; 
             xhr.open("POST", url); 
             xhr.setRequestHeader("Content-Type", "application/json"); 
             const data = JSON.stringify(body); 
@@ -57,39 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('This is a required field.');
         };
     };
-    function formReg(e) {
-        e.preventDefault();
-        let error = formValidate(formRegist);
-       
-        if (error === 0) {
-            const statusMessage = document.createElement('div');
-            statusMessage.classList.add('status');
-            statusMessage.textContent = message.loading;
-            formLogin.append(statusMessage);
-            
-            const body = {
-                user: user.value,
-                email: email.value,
-                password: password.value
-            };
 
-            fetch('http://localhost:3000/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(body)
-            })
-            .then(data => {
-                console.log(data);
-            })
-            .then(response => {
-                if (response < 400) {
-                    return response.json()
-                    } 
-            })
-        } else {
-            console.log('This is a required field.');
-        };
-    };
-});
+    formLogin.addEventListener('submit', formSend(formLogin, 'login'));
+    formRegist.addEventListener('submit', formSend(formRegist, 'register'));

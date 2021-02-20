@@ -179,10 +179,6 @@ span {
   box-shadow: 0 0 15px red;
 }
 
-.form-item.success input {
-  border-color: #cbf8cf;
-}
-
 .form-item.error input {
   border-color: red;
 }

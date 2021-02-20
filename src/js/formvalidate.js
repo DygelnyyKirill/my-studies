@@ -1,32 +1,35 @@
-function formValidate(formLogin) {
+function formValidate(form) {
     let error = 0;
-    let formReq = document.querySelectorAll('._req');
-    for (let i = 0; i < formReq.length; i++) {
-        const input = formReq[i];
-        formRemoveError(input);
-        if (input.classList.contains('_email')) {
-            if (emailTest(input)) {
-                formAddError(input);
-                error++;
-            }
-        } else {
-            if (input.value === '') {
-                formAddError(input);
-                error++;
-            }
+    let emailInput = form.querySelector('._email');
+    let passwordInput = form.querySelector('._password');
+
+
+    [emailInput, passwordInput].forEach((input) => fieldRemoveError(input))
+
+        if (validateEmail(emailInput)) {
+            fieldAddError(emailInput);
+            error++;
         }
-    }
+
+        if (passwordInput.value === '') {
+            fieldAddError(passwordInput);
+            error++;
+        }
     return error;
-};
-function formAddError(input) {
+}
+
+function fieldAddError(input) {
     input.parentElement.classList.add('_error');
     input.classList.add('_error');
     console.log('This is a required field.')
-};
-function formRemoveError(input) {
+}
+
+function fieldRemoveError(input) {
     input.parentElement.classList.remove('_error');
     input.classList.remove('_error');
-};
-function emailTest(input) {
+    console.log('ok')
+}
+
+function validateEmail(input) {
     return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value);
-};
+}
