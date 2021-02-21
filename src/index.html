@@ -15,15 +15,14 @@
                 </div>
                 <nav class="nav">
                     <a class="nav__link" href="index.html">Home</a>
-                    <a class="nav__link" id="auth__login" href="#">Search</a>
-                    <a class="nav__link" id="registr" href="#">Sing in</a>
+                    <a class="nav__link" href="#">Search</a>
+                    <a class="nav__link" id="form-modal" href="#">Sing in</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <div class="to__do">
-
         <div class="hero">
             <div class="form-box">
                 <div class="button-box">
@@ -33,10 +32,10 @@
                 </div>
                 <form action="#" id="login" class="input-group">  
                     <div class="form-item">
-                        <input type="text" class="input-field _email" placeholder="E-mail">
+                        <input type="text" class="input-field _email" name="email" placeholder="E-mail">
                     </div>
                     <div class="form-item">
-                        <input type="password" class="input-field _password" placeholder="Enter Password">
+                        <input type="password" class="input-field _password" name="password" placeholder="Enter Password">
                     </div>
                     <div class="form-item">
                         <input type="checkbox" checked class="chech-box"><span>Remember password</span>
@@ -47,13 +46,13 @@
                 </form>
                 <form action="#" id="register" class="input-group">
                     <div class="form-item">
-                        <input type="text" class="input-field _user" placeholder="User Id">
+                        <input type="text" class="input-field _user" name="user" placeholder="User Id">
                     </div>
                     <div class="form-item">
-                        <input type="email" class="input-field _email" placeholder="E-mail">
+                        <input type="email" class="input-field _email" name="email" placeholder="E-mail">
                     </div>
                     <div class="form-item">
-                        <input type="password" class="input-field _password" placeholder="Enter Password">
+                        <input type="password" class="input-field _password" name="password" placeholder="Enter Password">
                     </div>
                     <div class="form-item">
                         <input type="checkbox" checked class="chech-box"><span>I agree to the terms & conditions</span>
@@ -65,7 +64,6 @@
             </div>
         </div>
     </div>
-        
     <script src="../app/app.min.js"></script>
 </body>
 </html>
