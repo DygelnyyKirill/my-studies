@@ -1,11 +1,22 @@
-const modal = document.getElementById('form-modal');
-const formBoxMod = document.querySelector('.form-box');
-const formClose = document.querySelector('.hero');
+const authBth = document.getElementById('form-modal');
+const modal = document.querySelector('.modal');
+const formBox = document.querySelector('.form-box');
+const contentModal = document.querySelector('.text-content');
 
-modal.addEventListener('click', () => {
-    formBoxMod.style.display="block";
-})
+authBth.addEventListener('click', openFormBox);
 
-// formClose.addEventListener('click', () => {
-//     formBoxMod.style.display="none";
-// })
+function openFormBox() {
+    formBox.style.display = "block";
+}
+
+function showModal(data) {
+    formBox.style.display = "none";
+    modal.style.display = "flex";
+    const div = document.createElement('div');
+    div.className = 'text-content';
+    div.textContent = `${data}`
+    contentModal.appendChild(div);
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 1500);
+}

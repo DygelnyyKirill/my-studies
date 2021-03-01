@@ -3,19 +3,18 @@
     const formRegist = document.getElementById('register');
 
     const message = {
-        loading: 'Load...',
-        success: 'Your data has been sent',
-        failure: 'User is not found'
+        loading: 'img/load.gif',
     }
     
     const formSend = (form, path) => (e) => {
         e.preventDefault();
         const error = formValidate(form);
 
+        const statusMessage = document.createElement('img');
+        statusMessage.src = message.loading;
+        statusMessage.className = 'load-form';
+
         if (error === 0) {
-            const statusMessage = document.createElement('div');
-            statusMessage.classList.add('status');
-            statusMessage.textContent = message.loading;
             form.append(statusMessage);
       
             const formData = new FormData(form);
@@ -32,17 +31,12 @@
                 }
             }).then(data => {
                 console.log(data);
-                statusMessage.textContent = message.success;
-                setTimeout(() => {
-                    statusMessage.remove();
-                }, 2000);
+                showModal(data);
             }).catch(() => {
-                statusMessage.textContent = message.failure;
-                    setTimeout(() => {
-                        statusMessage.remove();
-                    }, 2000);
+                showModal();
             }).finally(() => {
                 form.reset();
+                statusMessage.remove()
             })
         } else {
             console.log('This is a required field.');
