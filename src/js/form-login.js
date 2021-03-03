@@ -18,14 +18,11 @@
             form.append(statusMessage);
       
             const formData = new FormData(form);
-            const object = {}
-            formData.forEach((value, key) => {
-                object[key] = value;
-            });
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
             
             fetch(`http://localhost:3000/auth/${path}`, {
                 method: "POST",
-                body: JSON.stringify(object),
+                body: json,
                 headers: {
                     "Content-Type": "application/json"
                 }

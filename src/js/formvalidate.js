@@ -9,7 +9,7 @@ function formValidate(form) {
         if (validateEmail(emailInput)) {
             fieldAddError(emailInput);
             error++;
-        }
+        }   
 
         if (passwordInput.value === '') {
             fieldAddError(passwordInput);
