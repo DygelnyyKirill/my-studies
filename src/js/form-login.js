@@ -5,14 +5,15 @@
     const message = {
         loading: 'img/load.gif',
     }
+
+    const statusMessage = document.createElement('img');
+    statusMessage.src = message.loading;
+    statusMessage.className = 'load-form';
+
     
     const formSend = (form, path) => (e) => {
         e.preventDefault();
         const error = formValidate(form);
-
-        const statusMessage = document.createElement('img');
-        statusMessage.src = message.loading;
-        statusMessage.className = 'load-form';
 
         if (error === 0) {
             form.append(statusMessage);
@@ -27,7 +28,7 @@
                     "Content-Type": "application/json"
                 }
             }).then(data => {
-                console.log(data);
+                console.log(data.text());
                 showModal(data);
             }).catch(() => {
                 showModal();
