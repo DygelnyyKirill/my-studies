@@ -1,6 +1,7 @@
 const addMessage = document.querySelector('.message');
 const addBtn = document.querySelector('.add');
 const todo = document.querySelector('.todo');
+const containerTodo = document.querySelector('.containerTodo');
 
 let todoList = [];
 if (localStorage.getItem('todo')) {
@@ -48,10 +49,14 @@ todo.addEventListener('change', function(e) {
 
 todo.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-    todoList.forEach(function(item) {
+    todoList.forEach(function(item, i) {
         if (item.todo === event.target.innerHTML) {
-            item.important = !item.important;
-            displayMessage();
+            if (event.ctrlKey) {
+                todoList.splice(i, 1);
+            } else {
+                item.important = !item.important;
+            }
+            displayMessages();
             localStorage.setItem('todo', JSON.stringify(todoList));
         }
     })

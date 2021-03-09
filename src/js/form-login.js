@@ -29,7 +29,7 @@
                 }
             }).then(data => {
                 console.log(data.text());
-                showModal(data);
+                showModal();
             }).catch(() => {
                 showModal();
             }).finally(() => {

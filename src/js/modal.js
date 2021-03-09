@@ -9,14 +9,15 @@ function openFormBox() {
     formBox.style.display = "block";
 }
 
-function showModal(data) {
+function showModal() {
     formBox.style.display = "none";
     modal.style.display = "flex";
     const div = document.createElement('div');
     div.className = 'text-content';
-    div.textContent = `${data}`
+    div.textContent = 'Login was successful'
     contentModal.appendChild(div);
     setTimeout(() => {
         modal.style.display = "none";
     }, 1500);
+    containerTodo.style.display = 'block';  
 }
