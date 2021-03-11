@@ -71,8 +71,9 @@ h1 {
 
 .hero {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding-left: 0;
+  outline: 1px solid black;
+  margin-right: 5px;
   background: url("../src/img/todo.jpg") center no-repeat;
   height: 100%;
   width: 100%;
@@ -88,7 +89,13 @@ h1 {
 }
 
 .form-box {
-  display: none;
+  width: 380px;
+  position: relative;
+  margin: 6% auto;
+  overflow: hidden;
+}
+
+.form-box1 {
   width: 380px;
   height: 480px;
   position: relative;
@@ -238,17 +245,6 @@ span {
   display: none;
 }
 
-.containerTodo {
-  display: none;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
-}
-
 .important {
   font-weight: bold;
   color: #A40E11;
@@ -258,7 +254,7 @@ span {
   max-width: 400px;
   display: block;
   margin: 0 auto 40px;
-  background-color: #7e7d7d;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 30px;
   border-radius: 10px;
   -wedkit-box-shadow: 0 2px 10px 0 #868d94;
@@ -268,7 +264,7 @@ span {
 .h1 {
   text-align: center;
   text-transform: uppercase;
-  color: black;
+  color: #fff;
   margin-top: 0;
   margin-bottom: 20px;
   font-size: 30px;

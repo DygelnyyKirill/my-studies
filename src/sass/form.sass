@@ -1,12 +1,13 @@
 .hero 
     display: flex
-    flex-direction: column
-    justify-content: center
+    padding-left: 0
+    outline: 1px solid black
+    margin-right: 5px
     background: url("../src/img/todo.jpg") center no-repeat
     height: 100%
     width: 100%
     background-position: center
-    background-size: cover
+    background-size: cover  
     position: absolute
     
 .status 
@@ -15,7 +16,15 @@
     padding-top: 10px
 
 .form-box 
-    display: none
+    width: 380px
+    // height: 480px
+    position: relative
+    margin: 6% auto
+    // background: #ffffff
+    // padding: 5px
+    overflow: hidden 
+
+.form-box1 
     width: 380px
     height: 480px
     position: relative
@@ -23,7 +32,6 @@
     background: #ffffff
     padding: 5px
     overflow: hidden 
-
 .button-box 
     width: 220px
     margin: 35px auto
