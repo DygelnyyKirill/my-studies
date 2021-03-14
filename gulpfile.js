@@ -16,6 +16,7 @@ const cleanСss = require('gulp-clean-css')
 function scripts() {
     return src('./src/js/**/*.js')
     .pipe(concat('app.min.js'))
+    .pipe(uglify())
     .pipe(dest('app/'))
 }
 
@@ -26,10 +27,10 @@ function startwatch() {
 
 function styles() {
     return src('./src/sass/app.min.sass')
-    // .pipe(concat('style.css'))
     .pipe(sass({
         outputStyle: "expanded"
     }))
+    .pipe(cleanСss(( { level: { 1: {specialComments: 0} } })))
     .pipe(dest('app/'))
 }
 

@@ -21,6 +21,9 @@
             const formData = new FormData(form);
             const json = JSON.stringify(Object.fromEntries(formData.entries()));
             
+            localStorage.setItem('user', json);
+            console.log(localStorage.getItem('user'));
+
             fetch(`http://localhost:3000/auth/${path}`, {
                 method: "POST",
                 body: json,
