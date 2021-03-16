@@ -1,14 +1,14 @@
-const authBth = document.getElementById('form-modal');
 const modal = document.querySelector('.modal');
-const formBox = document.querySelector('.form-box');
 const contentModal = document.querySelector('.text-content');
-
-function showModal() {
+// передать параметр статуса ответа от сервера
+function showModal(status) {
     modal.style.display = "flex";
-    const div = document.createElement('div');
-    div.className = 'text-content';
-    div.textContent = 'Login was successful'
-    contentModal.appendChild(div);
+    const modalDiv = `
+        <div class="text-content"> 
+            Login was ${status ? 'successful' : 'unsuccessful'}
+        </div>
+    `;
+    contentModal.innerHTML = modalDiv;
     setTimeout(() => {
         modal.style.display = "none";
     }, 1500);
