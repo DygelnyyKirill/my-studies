@@ -2,6 +2,7 @@
     const formBox = document.querySelector('.form-box1');
     const formLogin = document.getElementById('login');
     const formRegist = document.getElementById('register');
+   
 
     const message = {
         loading: 'img/load.gif',
@@ -35,18 +36,13 @@
 
         if (error === 0) {
             form.append(statusMessage);
-      
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+           
+            const data = {
+                email: form.querySelector('input[name="email"]').value,
+                password: form.querySelector('input[name="password"]').value,
+            }
 
             console.log(data)
-            // const data = {
-            //     email: email.value,
-            //     password: password.value
-            // }
             
             postData(url, JSON.stringify(data))
             .then(data => {

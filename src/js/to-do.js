@@ -23,6 +23,7 @@ addBtn.addEventListener('click', function() {
 
 })
 
+
 function displayMessages() {
     let displayMessage = '';        
     todoList.forEach(function(item, i) {
