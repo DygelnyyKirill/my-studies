@@ -20,9 +20,35 @@ addBtn.addEventListener('click', function() {
     todoList.push(newTodo);
     displayMessages();
     localStorage.setItem('todo', JSON.stringify(todoList));
+    getAllClients();
 
 })
+// const tokenId = localStorage.getItem('token');
 
+// function getAllClients() {
+//     const myHeaders = new Headers();
+//         myHeaders.append("Content-Type", "application/json");
+//         myHeaders.append("Authorization", tokenId);
+
+//     return fetch('http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da', {
+//         method: 'GET',
+//         headers: myHeaders,
+//     })
+//     .then(response => {
+//         if (response.status === 200) {
+//             console.log(response)
+//           return response.json();
+//         } else {
+//           throw new Error('Something went wrong on api server!');
+//         }
+//       })
+//     .then(response => {
+//         console.debug(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+// }
 
 function displayMessages() {
     let displayMessage = '';        
