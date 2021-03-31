@@ -2,53 +2,70 @@ const addMessage = document.querySelector('.message');
 const addBtn = document.querySelector('.add');
 const todo = document.querySelector('.todo');
 const containerTodo = document.querySelector('.containerTodo');
+const url = "http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da"
 
-let todoList = [];
-if (localStorage.getItem('todo')) {
-    todoList = JSON.parse(localStorage.getItem('todo'));
-    displayMessages(); 
+
+
+const postTodo = async (url, data) => {
+    let token = localStorage.getItem('token')
+    console.log(token)
+        // if (token) {
+        //     headers = {
+        //         "Content-Type": "application/json",
+        //         "Authorization": "Bearer " + token
+        // }
+        // console.log(headers)
+
+    const res = await fetch(url, {
+        method: "PUT",
+        body: data,
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        }
+    })
+    if (!res.ok) {
+        throw new Error();
+    }
+    return await res.json();
 }
 
-addBtn.addEventListener('click', function() {
+let todoList = [];
+    
 
+addBtn.addEventListener('click', function() {
+    
     const newTodo = {
         todo: addMessage.value,
         checked: false,
         important: false
     };
 
+    // console.log('todo', newTodo)
+
     todoList.push(newTodo);
     displayMessages();
+
+    postTodo(url, JSON.stringify(newTodo))
+    .then(todo => {
+        console.log(todo);
+    })
+    .catch(() => {
+        console.log('error')
+    })
+    .finally(() => {
+        addMessage.value = ''
+    })
+
+
     localStorage.setItem('todo', JSON.stringify(todoList));
-    getAllClients();
 
 })
-// const tokenId = localStorage.getItem('token');
 
-// function getAllClients() {
-//     const myHeaders = new Headers();
-//         myHeaders.append("Content-Type", "application/json");
-//         myHeaders.append("Authorization", tokenId);
-
-//     return fetch('http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da', {
-//         method: 'GET',
-//         headers: myHeaders,
-//     })
-//     .then(response => {
-//         if (response.status === 200) {
-//             console.log(response)
-//           return response.json();
-//         } else {
-//           throw new Error('Something went wrong on api server!');
-//         }
-//       })
-//     .then(response => {
-//         console.debug(response);
-//     })
-//     .catch(error => {
-//         console.error(error);
-//     });
-// }
+if (localStorage.getItem('todo')) {
+    todoList = JSON.parse(localStorage.getItem('todo'));
+    displayMessages(); 
+}
 
 function displayMessages() {
     let displayMessage = '';        
@@ -88,3 +105,30 @@ todo.addEventListener('contextmenu', function(e) {
         }
     })
 })
+
+// const tokenId = localStorage.getItem('token');
+
+// function getAllClients() {
+//     const myHeaders = new Headers();
+//         myHeaders.append("Content-Type", "application/json");
+//         myHeaders.append("Authorization", tokenId);
+
+//     return fetch('http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da', {
+//         method: 'GET',
+//         headers: myHeaders,
+//     })
+//     .then(response => {
+//         if (response.status === 200) {
+//             console.log(response)
+//           return response.json();
+//         } else {
+//           throw new Error('Something went wrong on api server!');
+//         }
+//       })
+//     .then(response => {
+//         console.debug(response);
+//     })
+//     .catch(error => {
+//         console.error(error);
+//     });
+// }

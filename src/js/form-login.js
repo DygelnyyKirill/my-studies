@@ -3,6 +3,28 @@
     const formLogin = document.getElementById('login');
     const formRegist = document.getElementById('register');
    
+    // function makeRequest() {
+    //     let headers = {}
+    //     if (localStorage.token) {
+    //         headers = {
+    //             "Content-Type": "application/json",
+    //             "Authorization": "Bearer " + localStorage.token
+    //     }
+    //     console.log(headers) 
+
+    //     return fetch("http://localhost:3000/to-dos", { 
+    //         headers: headers 
+    // })
+    //     .then(response => response.json())
+    //     .then(response => {
+    //         console.log(response)
+    //     })
+    //     .catch(console.error)
+    //     }
+    // }
+
+    // makeRequest()
+
 
     const message = {
         loading: 'img/load.gif',
@@ -26,11 +48,9 @@
                     "Content-Type": "application/json"
                 }
             })
-
             if (!res.ok) {
                 throw new Error();
             }
-
             return await res.json();
         }
 
@@ -62,39 +82,6 @@
             console.log('This is a required field.');
         };
     };
-
-    function makeRequest() {
-        let token = JSON.parse(localStorage.getItem('token'));
-    console.log(`Authorization=Bearer ${token}`)
-    fetch('http://localhost:3000/to-dos', {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
-        .catch(err => { console.log(err) })
-        // let headers = {}
-        // if (localStorage.token) {
-        //     headers = {'Authorization': localStorage.token}
-        // }
-        // console.log(headers)
-        // fetch("http://localhost:3000/to-dos", { headers: headers })
-        // .then((res) => {
-        //     if (res.status == 200) {
-        //         return res.text()
-        //     } else {
-        //         throw Error(res.statusText)
-        //     }
-        // })
-        // .then(responseText => console.log(responseText))
-        // .catch(console.error)
-    }
-
-    makeRequest()
 
     formLogin.addEventListener('submit', formSend(formLogin, 'login'));
     formRegist.addEventListener('submit', formSend(formRegist, 'register'));

@@ -33,3 +33,7 @@ function fieldRemoveError(input) {
 function validateEmail(input) {
     return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(input.value);
 }
+
+function isValid(value) {
+    return value.lenght >= 5
+}
