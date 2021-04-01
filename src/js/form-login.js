@@ -2,30 +2,7 @@
     const formBox = document.querySelector('.form-box1');
     const formLogin = document.getElementById('login');
     const formRegist = document.getElementById('register');
-   
-    // function makeRequest() {
-    //     let headers = {}
-    //     if (localStorage.token) {
-    //         headers = {
-    //             "Content-Type": "application/json",
-    //             "Authorization": "Bearer " + localStorage.token
-    //     }
-    //     console.log(headers) 
-
-    //     return fetch("http://localhost:3000/to-dos", { 
-    //         headers: headers 
-    // })
-    //     .then(response => response.json())
-    //     .then(response => {
-    //         console.log(response)
-    //     })
-    //     .catch(console.error)
-    //     }
-    // }
-
-    // makeRequest()
-
-
+    
     const message = {
         loading: 'img/load.gif',
     }

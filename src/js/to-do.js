@@ -3,35 +3,59 @@ const addBtn = document.querySelector('.add');
 const todo = document.querySelector('.todo');
 const containerTodo = document.querySelector('.containerTodo');
 const url = "http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da"
+const jwt = localStorage.getItem('token')
+console.log(jwt)
 
 
+// const postTodo = async (url, data) => {
+//     let token = localStorage.getItem('token')
+//     console.log(token)
+       
 
-const postTodo = async (url, data) => {
-    let token = localStorage.getItem('token')
-    console.log(token)
-        // if (token) {
-        //     headers = {
-        //         "Content-Type": "application/json",
-        //         "Authorization": "Bearer " + token
-        // }
-        // console.log(headers)
+//     const res = await fetch(url, {
+//         method: "GET",
+//         body: data,
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": "Bearer " + token
+//         }
+//     })
+//     if (!res.ok) {
+//         throw new Error();
+//     }
+//     return await res.json();
+// }
+  // postTodo(url, JSON.stringify()
+    // .then(todo => {
+    //     console.log(todo);
+    // })
+    // .catch(() => {
+    //     console.log('error')
+    // })
+    // .finally(() => {
+    //     addMessage.value = ''
+    // })
 
-    const res = await fetch(url, {
-        method: "PUT",
-        body: data,
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-        }
-    })
-    if (!res.ok) {
-        throw new Error();
-    }
-    return await res.json();
-}
 
 let todoList = [];
-    
+
+function getResource() {
+    fetch('http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da', {
+        headers: {
+            "Authorization": `Bearer ${jwt}`
+        }
+    })
+    .then(data => data.text)
+    .then(res => {
+        console.log(res)
+    })
+    .catch(() => {
+        console.log('error')
+    })
+    .finally(() => {
+        addMessage.value = ''
+    })
+}    
 
 addBtn.addEventListener('click', function() {
     
@@ -45,18 +69,8 @@ addBtn.addEventListener('click', function() {
 
     todoList.push(newTodo);
     displayMessages();
-
-    postTodo(url, JSON.stringify(newTodo))
-    .then(todo => {
-        console.log(todo);
-    })
-    .catch(() => {
-        console.log('error')
-    })
-    .finally(() => {
-        addMessage.value = ''
-    })
-
+    getResource()
+  
 
     localStorage.setItem('todo', JSON.stringify(todoList));
 
