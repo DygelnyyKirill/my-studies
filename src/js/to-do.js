@@ -1,80 +1,90 @@
 const addMessage = document.querySelector('.message');
-const addBtn = document.querySelector('.add');
+const addBtnTodo = document.querySelector('.add-Todo');
+const addBtnServer = document.querySelector('.add-Server');
 const todo = document.querySelector('.todo');
 const containerTodo = document.querySelector('.containerTodo');
-const url = "http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da"
 const jwt = localStorage.getItem('token')
-console.log(jwt)
-
-
-// const postTodo = async (url, data) => {
-//     let token = localStorage.getItem('token')
-//     console.log(token)
-       
-
-//     const res = await fetch(url, {
-//         method: "GET",
-//         body: data,
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization": "Bearer " + token
-//         }
-//     })
-//     if (!res.ok) {
-//         throw new Error();
-//     }
-//     return await res.json();
-// }
-  // postTodo(url, JSON.stringify()
-    // .then(todo => {
-    //     console.log(todo);
-    // })
-    // .catch(() => {
-    //     console.log('error')
-    // })
-    // .finally(() => {
-    //     addMessage.value = ''
-    // })
+console.log('jwt', jwt)
 
 
 let todoList = [];
+let serverList = [];
 
-function getResource() {
-    fetch('http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da', {
+function getResource(token) {
+    fetch('http://localhost:3000/to-dos/605110eae5e3d06785c076ac', {
         headers: {
-            "Authorization": `Bearer ${jwt}`
+            "Authorization": `Bearer ${token}`
         }
     })
-    .then(data => data.text)
+    .then(data => data.json())
     .then(res => {
-        console.log(res)
+        serverList = res
+        todoList = res.todo[0].listItems
+        console.log('res', serverList)
+        displayMessages();
     })
-    .catch(() => {
-        console.log('error')
+    .catch((e) => {
+        console.log('error', e)
     })
     .finally(() => {
         addMessage.value = ''
     })
 }    
 
-addBtn.addEventListener('click', function() {
+getResource(jwt)
+
+addBtnTodo.addEventListener('click', function() {
     
     const newTodo = {
-        todo: addMessage.value,
-        checked: false,
+        title: addMessage.value,
+        isCompleted: false,
         important: false
     };
 
-    // console.log('todo', newTodo)
+    todoList.push(newTodo);
+    localStorage.setItem('todo', JSON.stringify(todoList));
+    displayMessages();
+    addMessage.value = ''
+})
+
+addBtnServer.addEventListener('click', function() {
+    
+    const newTodo = {
+        title: addMessage.value,
+        isCompleted: false,
+        important: false
+    };
 
     todoList.push(newTodo);
-    displayMessages();
-    getResource()
-  
-
     localStorage.setItem('todo', JSON.stringify(todoList));
-
+    updateDataTodo(newTodo)
 })
+
+function updateDataTodo(todo) {
+
+    serverList.todo[0].listItems = todoList
+
+    fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
+        method: "PUT",
+        body: JSON.stringify(serverList.todo[0]),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    .then(res => res.json())
+    .then(response => {
+        console.log(response);
+        displayMessages();
+    })
+    .catch((e) => {
+        console.log('error', e)
+    })
+    .finally(() => {
+        statusMessage.remove()
+    })
+
+}
 
 if (localStorage.getItem('todo')) {
     todoList = JSON.parse(localStorage.getItem('todo'));
@@ -84,10 +94,11 @@ if (localStorage.getItem('todo')) {
 function displayMessages() {
     let displayMessage = '';        
     todoList.forEach(function(item, i) {
+        console.log('item', item)
         displayMessage += `
         <li>
-            <input type="checkbox" id="item_${i}" ${item.checked ? 'checked' : ''}>
-            <label for="item_${i}" class="${item.important ? 'important' : ''}">${item.todo}</label>
+            <input type="checkbox" id="item_${i}" ${item.isCompleted ? 'isCompleted' : ''}>
+            <label for="item_${i}" class="${item.important ? 'important' : ''}">${item.title}</label>
         </li>
         `;
         todo.innerHTML = displayMessage;
@@ -97,8 +108,8 @@ function displayMessages() {
 todo.addEventListener('change', function(e) {
     const valueLabel = todo.querySelector('[for=' + e.target.getAttribute('id') + ']').innerHTML;
     todoList.forEach(function(item) {
-        if (item.todo === valueLabel) {
-            item.checked = !item.checked;
+        if (item.title === valueLabel) {
+            item.isCompleted = !item.isCompleted;
             localStorage.setItem('todo', JSON.stringify(todoList));
         }
     })
@@ -108,7 +119,7 @@ todo.addEventListener('change', function(e) {
 todo.addEventListener('contextmenu', function(e) {
     e.preventDefault();
     todoList.forEach(function(item, i) {
-        if (item.todo === event.target.innerHTML) {
+        if (item.title === event.target.innerHTML) {
             if (event.ctrlKey) {
                 todoList.splice(i, 1);
             } else {
@@ -119,30 +130,3 @@ todo.addEventListener('contextmenu', function(e) {
         }
     })
 })
-
-// const tokenId = localStorage.getItem('token');
-
-// function getAllClients() {
-//     const myHeaders = new Headers();
-//         myHeaders.append("Content-Type", "application/json");
-//         myHeaders.append("Authorization", tokenId);
-
-//     return fetch('http://localhost:3000/to-dos/604fb49e70d35c3d3c2ca0da', {
-//         method: 'GET',
-//         headers: myHeaders,
-//     })
-//     .then(response => {
-//         if (response.status === 200) {
-//             console.log(response)
-//           return response.json();
-//         } else {
-//           throw new Error('Something went wrong on api server!');
-//         }
-//       })
-//     .then(response => {
-//         console.debug(response);
-//     })
-//     .catch(error => {
-//         console.error(error);
-//     });
-// }
