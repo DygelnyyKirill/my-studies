@@ -94,11 +94,12 @@ if (localStorage.getItem('todo')) {
 function displayMessages() {
     let displayMessage = '';        
     todoList.forEach(function(item, i) {
-        console.log('item', item)
+        // console.log('item', item)
         displayMessage += `
         <li>
             <input type="checkbox" id="item_${i}" ${item.isCompleted ? 'isCompleted' : ''}>
             <label for="item_${i}" class="${item.important ? 'important' : ''}">${item.title}</label>
+            <button class="trash-btn">X</button>
         </li>
         `;
         todo.innerHTML = displayMessage;
@@ -125,8 +126,22 @@ todo.addEventListener('contextmenu', function(e) {
             } else {
                 item.important = !item.important;
             }
-            displayMessages();
+            displayMessages(); 
             localStorage.setItem('todo', JSON.stringify(todoList));
         }
     })
 })
+const toList = document.querySelector('.todo');
+
+toList.addEventListener('click', deleteCheck);
+
+console.log(toList)
+
+function deleteCheck(e) {
+    const item = e.target;
+    if (item.classList[0] === "trash-btn") {
+        const todo = item.parentElement;
+        todo.remove();
+        console.log(todo)
+    }
+}
