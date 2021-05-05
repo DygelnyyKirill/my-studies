@@ -1,10 +1,13 @@
+'use strict'
+// import {deliteTask} from '../modules/deleteTask.js'
+
 const addMessage = document.querySelector('.message');
 const addBtnTodo = document.querySelector('.add-Todo');
 const addBtnServer = document.querySelector('.add-Server');
 const todo = document.querySelector('.todo');
-const containerTodo = document.querySelector('.containerTodo');
-const jwt = localStorage.getItem('token')
-console.log('jwt', jwt)
+// const jwt = localStorage.getItem('token')
+// console.log('jwt', jwt)
+
 
 
 let todoList = [];
@@ -31,7 +34,7 @@ function getResource(token) {
     })
 }    
 
-getResource(jwt)
+getResource(localStorage.getItem('token'))
 
 addBtnTodo.addEventListener('click', function() {
     
@@ -48,15 +51,15 @@ addBtnTodo.addEventListener('click', function() {
 })
 
 addBtnServer.addEventListener('click', function() {
-    
-    const newTodo = {
-        title: addMessage.value,
-        isCompleted: false,
-        important: false
-    };
+     
+    // const newTodo = {
+    //    title: addMessage.value,
+    //     isCompleted: false,
+    //     important: false
+    // };
 
-    todoList.push(newTodo);
-    localStorage.setItem('todo', JSON.stringify(todoList));
+    // todoList.push(newTodo);
+    // localStorage.setItem('todo', JSON.stringify(todoList));
     updateDataTodo(newTodo)
 })
 
@@ -89,7 +92,7 @@ function updateDataTodo(todo) {
 if (localStorage.getItem('todo')) {
     todoList = JSON.parse(localStorage.getItem('todo'));
     displayMessages(); 
-}
+}   
 
 function displayMessages() {
     let displayMessage = '';        
@@ -117,31 +120,45 @@ todo.addEventListener('change', function(e) {
     console.log('valueLabel:', valueLabel)
 })
 
-todo.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
+todo.addEventListener('click', deliteTask); 
+
+
+function deliteTask(e) {
+    // const item = e.target;
+    console.log(item)
     todoList.forEach(function(item, i) {
-        if (item.title === event.target.innerHTML) {
-            if (event.ctrlKey) {
-                todoList.splice(i, 1);
-            } else {
-                item.important = !item.important;
+        if (item.todo === e.target.innerHTML) {
+            if (item.classList[0] === "trash-btn") {
+                todoList.splice(i, 1)
+                localStorage.setItem('todo', JSON.stringify(todoList));
             }
-            displayMessages(); 
-            localStorage.setItem('todo', JSON.stringify(todoList));
         }
+       
+        // const todo = item.parentElement.remove();
+
+        // serverList.todo[0].listItems = todoList
+
+        // fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
+        //     method: "PUT",
+        //     body: JSON.stringify(serverList.todo[0]),
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // })
+        // .then(res => res.json())
+        // .then(response => {
+        //     console.log(response);
+        //     console.log('res', serverList.todo[0].listItems)
+        //     const todo = item.parentElement.remove(); 
+        //     localStorage.setItem('todo', JSON.stringify(todoList));
+
+        // })
+        // .catch((e) => {
+        //     console.log('error', e)
+        // })
+        // .finally(() => {
+        //     statusMessage.remove()
+        // })
+    
     })
-})
-const toList = document.querySelector('.todo');
-
-toList.addEventListener('click', deleteCheck);
-
-console.log(toList)
-
-function deleteCheck(e) {
-    const item = e.target;
-    if (item.classList[0] === "trash-btn") {
-        const todo = item.parentElement;
-        todo.remove();
-        console.log(todo)
-    }
-}
+};
