@@ -1,14 +1,9 @@
 'use strict'
 // import {deliteTask} from '../modules/deleteTask.js'
-
 const addMessage = document.querySelector('.message');
 const addBtnTodo = document.querySelector('.add-Todo');
 const addBtnServer = document.querySelector('.add-Server');
 const todo = document.querySelector('.todo');
-// const jwt = localStorage.getItem('token')
-// console.log('jwt', jwt)
-
-
 
 let todoList = [];
 let serverList = [];
@@ -50,22 +45,15 @@ addBtnTodo.addEventListener('click', function() {
     addMessage.value = ''
 })
 
-addBtnServer.addEventListener('click', function() {
-     
-    // const newTodo = {
-    //    title: addMessage.value,
-    //     isCompleted: false,
-    //     important: false
-    // };
-
-    // todoList.push(newTodo);
-    // localStorage.setItem('todo', JSON.stringify(todoList));
-    updateDataTodo(newTodo)
+addBtnServer.addEventListener('click', function() {    
+    updateDataTodo()
+    alert('Tasks have been successfully sent to the server')
 })
 
 function updateDataTodo(todo) {
 
     serverList.todo[0].listItems = todoList
+    console.log('ServList', serverList.todo[0])
 
     fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
         method: "PUT",
@@ -74,7 +62,6 @@ function updateDataTodo(todo) {
             "Content-Type": "application/json"
         }
     })
-
     .then(res => res.json())
     .then(response => {
         console.log(response);
@@ -86,7 +73,6 @@ function updateDataTodo(todo) {
     .finally(() => {
         statusMessage.remove()
     })
-
 }
 
 if (localStorage.getItem('todo')) {
@@ -102,7 +88,7 @@ function displayMessages() {
         <li>
             <input type="checkbox" id="item_${i}" ${item.isCompleted ? 'isCompleted' : ''}>
             <label for="item_${i}" class="${item.important ? 'important' : ''}">${item.title}</label>
-            <button class="trash-btn">X</button>
+            <button id="item_${i}" class="trash-btn">X</button>
         </li>
         `;
         todo.innerHTML = displayMessage;
@@ -120,45 +106,71 @@ todo.addEventListener('change', function(e) {
     console.log('valueLabel:', valueLabel)
 })
 
-todo.addEventListener('click', deliteTask); 
+todo.addEventListener('click', function(e) {
+    let item = e.target;
+    if (item.classList[0] === "trash-btn") {
+        const valueLabel = todo.querySelector('[for=' + e.target.getAttribute('id') + ']').innerHTML;
+        console.log(valueLabel)
 
-
-function deliteTask(e) {
-    // const item = e.target;
-    console.log(item)
-    todoList.forEach(function(item, i) {
-        if (item.todo === e.target.innerHTML) {
-            if (item.classList[0] === "trash-btn") {
-                todoList.splice(i, 1)
-                localStorage.setItem('todo', JSON.stringify(todoList));
-            }
+        let arrTasks = serverList.todo[0].listItems = todoList
+        let newArrTasks = arrTasks.findIndex(item => item.title == valueLabel);
+        if (newArrTasks !== -1) {
+            arrTasks.splice(newArrTasks, 1);
         }
-       
-        // const todo = item.parentElement.remove();
 
-        // serverList.todo[0].listItems = todoList
+        console.log("newArray", arrTasks)
 
-        // fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
-        //     method: "PUT",
-        //     body: JSON.stringify(serverList.todo[0]),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(response => {
-        //     console.log(response);
-        //     console.log('res', serverList.todo[0].listItems)
-        //     const todo = item.parentElement.remove(); 
-        //     localStorage.setItem('todo', JSON.stringify(todoList));
+        fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
+            method: "PUT",
+            body: JSON.stringify(arrTasks),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(response => {
+            console.log('resDelete', response);
+        })
+        .catch((e) => {
+            console.log('error', e)
+        })
+        .finally(() => {
+            statusMessage.remove()
+        })
+    }
+})
 
-        // })
-        // .catch((e) => {
-        //     console.log('error', e)
-        // })
-        // .finally(() => {
-        //     statusMessage.remove()
-        // })
-    
-    })
-};
+todo.addEventListener('click', function(e) {
+    let item = e.target;
+    if (item.classList[0] === "trash-btn") {
+        const todo = item.parentElement;
+        todo.remove();
+    }
+}); 
+
+// const array = serverList.todo[0].listItems = todoList;
+
+
+// let idButton = e.target.getAttribute('id');
+// let forLabal = todo.querySelector('[for=' + idButton + ']');
+// console.log(forLabal)
+
+// let index = array.indexOf(idButton);
+// console.log(index)
+// if (index > -1) {
+//     array.splice(index, 1);
+// }
+
+// serverList.todo[0].listItems.forEach(function(idButton) {
+//     if (serverList.todo[0].listItems > -1) {
+//         serverList.todo[0].listItems.splice(idButton, 1);
+//     }
+// })
+
+// console.log('res', array)
+// const todo = item.parentElement.remove(); 
+// localStorage.setItem('todo', JSON.stringify(todoList));
+// let valueLabel = todo.querySelector('[for='+ idButton +']').innerHTML;
+// console.log(valueLabel)
+
+
