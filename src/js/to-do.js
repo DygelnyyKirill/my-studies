@@ -112,7 +112,7 @@ todo.addEventListener('click', function(e) {
         const valueLabel = todo.querySelector('[for=' + e.target.getAttribute('id') + ']').innerHTML;
         console.log(valueLabel)
 
-        let arrTasks = serverList.todo[0].listItems = todoList
+        const arrTasks = serverList.todo[0].listItems = todoList
         let newArrTasks = arrTasks.findIndex(item => item.title == valueLabel);
         if (newArrTasks !== -1) {
             arrTasks.splice(newArrTasks, 1);
@@ -122,7 +122,7 @@ todo.addEventListener('click', function(e) {
 
         fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
             method: "PUT",
-            body: JSON.stringify(arrTasks),
+            body: JSON.stringify(serverList.todo[0]),
             headers: {
                 "Content-Type": "application/json"
             }
