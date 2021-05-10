@@ -32,17 +32,19 @@ function getResource(token) {
 getResource(localStorage.getItem('token'))
 
 addBtnTodo.addEventListener('click', function() {
-    
-    const newTodo = {
-        title: addMessage.value,
-        isCompleted: false,
-        important: false
-    };
-
-    todoList.push(newTodo);
-    localStorage.setItem('todo', JSON.stringify(todoList));
-    displayMessages();
-    addMessage.value = ''
+    if (addMessage.value != '') {
+        const newTodo = {
+            title: addMessage.value,
+            isCompleted: false,
+            important: false
+        };
+        todoList.push(newTodo);
+        localStorage.setItem('todo', JSON.stringify(todoList));
+        displayMessages();
+        addMessage.value = ''
+    } else {
+        alert('Enter the tasks');
+    }
 })
 
 addBtnServer.addEventListener('click', function() {    
@@ -118,8 +120,6 @@ todo.addEventListener('click', function(e) {
             arrTasks.splice(newArrTasks, 1);
         }
 
-        console.log("newArray", arrTasks)
-
         fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
             method: "PUT",
             body: JSON.stringify(serverList.todo[0]),
@@ -141,10 +141,10 @@ todo.addEventListener('click', function(e) {
     }
 })
 
-todo.addEventListener('click', function(e) {
-    let item = e.target;
+todo.addEventListener('click', function deleteTasks(e) {
+    const item = e.target;
     if (item.classList[0] === "trash-btn") {
         const todo = item.parentElement;
         todo.remove();
     }
-}); 
+})
