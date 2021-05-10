@@ -86,7 +86,7 @@ function displayMessages() {
         // console.log('item', item)
         displayMessage += `
         <li>
-            <input type="checkbox" id="item_${i}" ${item.isCompleted ? 'isCompleted' : ''}>
+            <input type="checkbox" id="item_${i}" ${item.isCompleted ? 'checked' : ''}>
             <label for="item_${i}" class="${item.important ? 'important' : ''}">${item.title}</label>
             <button id="item_${i}" class="trash-btn">X</button>
         </li>
@@ -129,6 +129,7 @@ todo.addEventListener('click', function(e) {
         })
         .then(res => res.json())
         .then(response => {
+            localStorage.setItem('todo', JSON.stringify(todoList));
             console.log('resDelete', response);
         })
         .catch((e) => {
@@ -147,30 +148,3 @@ todo.addEventListener('click', function(e) {
         todo.remove();
     }
 }); 
-
-// const array = serverList.todo[0].listItems = todoList;
-
-
-// let idButton = e.target.getAttribute('id');
-// let forLabal = todo.querySelector('[for=' + idButton + ']');
-// console.log(forLabal)
-
-// let index = array.indexOf(idButton);
-// console.log(index)
-// if (index > -1) {
-//     array.splice(index, 1);
-// }
-
-// serverList.todo[0].listItems.forEach(function(idButton) {
-//     if (serverList.todo[0].listItems > -1) {
-//         serverList.todo[0].listItems.splice(idButton, 1);
-//     }
-// })
-
-// console.log('res', array)
-// const todo = item.parentElement.remove(); 
-// localStorage.setItem('todo', JSON.stringify(todoList));
-// let valueLabel = todo.querySelector('[for='+ idButton +']').innerHTML;
-// console.log(valueLabel)
-
-
