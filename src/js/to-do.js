@@ -1,5 +1,6 @@
 'use strict'
-// import {deliteTask} from '../modules/deleteTask.js'
+// import {displayMessages} from '../modules/displayMessages.js'
+
 const addMessage = document.querySelector('.message');
 const addBtnTodo = document.querySelector('.add-Todo');
 const addBtnServer = document.querySelector('.add-Server');
@@ -49,6 +50,7 @@ addBtnTodo.addEventListener('click', function() {
 
 addBtnServer.addEventListener('click', function() {    
     updateDataTodo()
+
     alert('Tasks have been successfully sent to the server')
 })
 
@@ -94,6 +96,7 @@ function displayMessages() {
         </li>
         `;
         todo.innerHTML = displayMessage;
+        
     });
 }
 
@@ -114,30 +117,12 @@ todo.addEventListener('click', function(e) {
         const valueLabel = todo.querySelector('[for=' + e.target.getAttribute('id') + ']').innerHTML;
         console.log(valueLabel)
 
+        // поиск элемента через Item - порядковый номер
         const arrTasks = serverList.todo[0].listItems = todoList
         let newArrTasks = arrTasks.findIndex(item => item.title == valueLabel);
         if (newArrTasks !== -1) {
             arrTasks.splice(newArrTasks, 1);
         }
-
-        fetch(`http://localhost:3000/to-dos/${serverList.todo[0]._id}`, {
-            method: "PUT",
-            body: JSON.stringify(serverList.todo[0]),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-        .then(res => res.json())
-        .then(response => {
-            localStorage.setItem('todo', JSON.stringify(todoList));
-            console.log('resDelete', response);
-        })
-        .catch((e) => {
-            console.log('error', e)
-        })
-        .finally(() => {
-            statusMessage.remove()
-        })
     }
 })
 
@@ -146,5 +131,7 @@ todo.addEventListener('click', function deleteTasks(e) {
     if (item.classList[0] === "trash-btn") {
         const todo = item.parentElement;
         todo.remove();
+        localStorage.setItem('todo', JSON.stringify(todoList));
+
     }
 })
