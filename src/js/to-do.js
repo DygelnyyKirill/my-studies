@@ -118,7 +118,7 @@ todo.addEventListener('click', function(e) {
         console.log(valueLabel)
 
         // поиск элемента через Item - порядковый номер
-        const arrTasks = serverList.todo[0].listItems = todoList
+        const arrTasks = todoList
         let newArrTasks = arrTasks.findIndex(item => item.title == valueLabel);
         if (newArrTasks !== -1) {
             arrTasks.splice(newArrTasks, 1);
@@ -132,6 +132,6 @@ todo.addEventListener('click', function deleteTasks(e) {
         const todo = item.parentElement;
         todo.remove();
         localStorage.setItem('todo', JSON.stringify(todoList));
-
+        
     }
 })
