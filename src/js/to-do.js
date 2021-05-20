@@ -92,7 +92,7 @@ function displayMessages() {
         <li>
             <input type="checkbox" id="item_${i}" ${item.isCompleted ? 'checked' : ''}>
             <label for="item_${i}" class="${item.important ? 'important' : ''}">${item.title}</label>
-            <button id="item_${i}" class="trash-btn">X</button>
+            <button id="${i}" class="trash-btn">X</button>
         </li>
         `;
         todo.innerHTML = displayMessage;
@@ -114,15 +114,8 @@ todo.addEventListener('change', function(e) {
 todo.addEventListener('click', function(e) {
     let item = e.target;
     if (item.classList[0] === "trash-btn") {
-        const valueLabel = todo.querySelector('[for=' + e.target.getAttribute('id') + ']').innerHTML;
-        console.log(valueLabel)
-
-        // поиск элемента через Item - порядковый номер
-        const arrTasks = todoList
-        let newArrTasks = arrTasks.findIndex(item => item.title == valueLabel);
-        if (newArrTasks !== -1) {
-            arrTasks.splice(newArrTasks, 1);
-        }
+        const valueLabel = e.target.getAttribute('id');
+        const arrTasks = todoList.splice(valueLabel, 1);  
     }
 })
 
